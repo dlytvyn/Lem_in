@@ -22,6 +22,31 @@ t_read  *new_lst()
 	return (run);
 }
 
+t_links *new_links()
+{
+	t_links *links;
+
+	links = (t_links*)malloc(sizeof(t_links));
+	links->r1 = 0;
+	links->r2 = 0;
+	links->next = NULL;
+	return (links);
+}
+
+t_rooms *new_rooms()
+{
+	t_rooms *rooms;
+
+	rooms = (t_rooms*)malloc(sizeof(t_rooms));
+	rooms->end = 0;
+	rooms->next = 0;
+	rooms->name = NULL;
+	rooms->x = 0;
+	rooms->y = 0;
+	rooms->next = 0;
+	return (rooms);
+}
+
 void read_field(t_read *field, int fd)
 {
 	char *line;
@@ -40,6 +65,23 @@ void read_field(t_read *field, int fd)
 	}
 }
 
+int     is_room_valid(char *row)
+{
+	int i;
+
+	i = 0;
+	while (row[i] != ' ')
+		i++;
+	while (row[i])
+	{
+		if (ft_isdigit(row[i]) == 1 || row[i] == ' ')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
 void    print_res(t_read *run)
 {
 	while (run)
@@ -51,9 +93,11 @@ void    print_res(t_read *run)
 
 void    get_room_data(t_read *run, t_st *st)
 {
-	int     i;
+	int i;
 
 	i = 0;
+	if (!is_room_valid(run->row))
+		exit(1);
 	while (run->row[i] != ' ')
 		i++;
 	st->rooms->name = ft_strnew(i + 1);
@@ -65,15 +109,38 @@ void    get_room_data(t_read *run, t_st *st)
 	st->rooms->y = ft_atoi(run->row + i);
 }
 
-int     is_data_valid(char *row)
+int     is_valid_link(char *str)
+{
+	int i;
+	int c;
+
+	i = 0;
+	c = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]) && str[i] != '-')
+			return (0);
+		else if (str[i] == '-')
+			c++;
+		i++;
+		if (c > 1)
+			return (0);
+	}
+	return (1);
+}
+
+void    get_link_data(t_read *run, t_st *st)
 {
 	int i;
 
+	if (!is_valid_link(run->row))
+		exit (1);
 	i = 0;
-	while (row[i])
-	{
-
-	}
+	st->links->r1 = ft_atoi(run->row);
+	while (run->row[i] != '-')
+		i++;
+	i++;
+	st->links->r2 = ft_atoi(run->row + i);
 }
 
 void    get_data(t_read *run, t_st *st)
@@ -84,20 +151,43 @@ void    get_data(t_read *run, t_st *st)
 	run = run->next;
 	while (run)
 	{
-		if (ft_strcmp(run->row, "##start") == 0)
+		if (ft_strstr(run->row, "-") == 0)
 		{
+			if (st->rooms->name != NULL)
+			{
+				st->rooms->next = new_rooms();
+				st->rooms = st->rooms->next;
+			}
+			if (ft_strcmp(run->row, "##start") == 0)
+			{
+				run = run->next;
+				st->rooms->start = 1;
+				get_room_data(run, st);
+			}
+			else if (ft_strcmp(run->row, "##end") == 0)
+			{
+				run = run->next;
+				st->rooms->end = 1;
+				get_room_data(run, st);
+			}
+			else
+				get_room_data(run, st);
 			run = run->next;
-			st->rooms->start = 1;
-			get_room_data(run, st);
 		}
-		else if (ft_strcmp(run->row, "##end") == 0)
+		else if (ft_strstr(run->row, "-") != 0)
 		{
+			if (st->links->r1 != 0 || st->links->r2 != 0)
+			{
+				st->links->next = new_links();
+				st->links = st->links->next;
+			}
+			get_link_data(run, st);
 			run = run->next;
-			st->rooms->end = 1;
-			get_room_data(run, st);
 		}
-		else if ()
-		run = run->next;
+		else if (ft_strcmp(run->row, "#comment"))
+			run = run->next;
+		else
+			exit (1);
 	}
 }
 
@@ -107,17 +197,8 @@ t_st    *new_st()
 
 	st = (t_st*)malloc(sizeof(t_st));
 	st->ants = 0;
-	st->links = (t_links*)malloc(sizeof(t_links));
-	st->links->r1 = 0;
-	st->links->r2 = 0;
-	st->links->next = NULL;
-	st->rooms = (t_rooms*)malloc(sizeof(t_rooms));
-	st->rooms->end = 1;
-	st->rooms->next = 0;
-	st->rooms->name = NULL;
-	st->rooms->x = 0;
-	st->rooms->y = 0;
-	st->rooms->next = 0;
+	st->links = new_links();
+	st->rooms = new_rooms();
 	return (st);
 }
 
@@ -129,7 +210,7 @@ int main()
 
 	field = new_lst();
 	st = new_st();
-	fd = open("/Users/dlytvyn/Lem-in/map", O_RDONLY);
+	fd = open("/Users/dlytvyn/Lem-in/test/2.txt", O_RDONLY);
 	read_field(field, fd);
 	get_data(field, st);
 	print_res(field);
