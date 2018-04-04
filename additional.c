@@ -4,6 +4,28 @@
 
 #include "lem_in.h"
 
+t_path  *new_path(void)
+{
+	t_path  *path;
+
+	path = (t_path*)malloc(sizeof(t_path));
+	path->in = 0;
+	path->next = NULL;
+	return (path);
+
+}
+
+t_ways  *new_ways(void)
+{
+	t_ways  *ways;
+
+	ways = (t_ways*)malloc(sizeof(t_ways));
+	ways->path = new_path();
+	ways->path_copy = ways->path;
+	ways->next = NULL;
+	return (ways);
+}
+
 void    ft_error(void)
 {
 	write(1, "Map Error\n", 10);

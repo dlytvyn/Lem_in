@@ -41,19 +41,10 @@ int main(int argc, char **argv)
 	st.rc = st.rooms;
 	st.matrix = NULL;
 	st.size = 0;
+	st.ways = NULL;
+	st.first = 0;
+	st.last = 0;
 	reader(&st);
+	order(&st);
 
-	int i = 0;
-	int j = 0;
-	while (i < st.size)
-	{
-		j = 0;
-		while (j < st.size)
-		{
-			printf("%d ", st.matrix[i][j]);
-			j++;
-		}
-		i++;
-		printf("\n");
-	}
 }

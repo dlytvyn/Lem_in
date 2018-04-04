@@ -32,6 +32,7 @@ typedef struct      s_path
 typedef struct      s_ways
 {
 	struct s_path   *path;
+	struct  s_path  *path_copy;
 	struct s_ways   *next;
 }                   t_ways;
 
@@ -44,6 +45,10 @@ typedef struct      s_gen
 	struct  s_rooms *rc;
 	int             **matrix;
 	int             size;
+	struct  s_ways  *ways;
+	struct s_ways   *ways_copy;
+	int             first;
+	int             last;
 }                   t_gen;
 
 t_rooms *new_room();
@@ -55,5 +60,8 @@ void    create_matrix(t_gen *st);
 void    ft_error(void);
 void    get_room_data(char *line, t_gen *st);
 void    get_link_data(char *line, t_gen *st);
+void    order(t_gen *st);
+t_ways  *new_ways(void);
+t_path  *new_path(void);
 
 #endif //LEM_IN_LEM_IN_H
