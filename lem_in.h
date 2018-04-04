@@ -1,56 +1,59 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dlytvyn <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/04 14:30:39 by dlytvyn           #+#    #+#             */
-/*   Updated: 2018/03/04 14:30:39 by dlytvyn          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+//
+// Created by Dmytro LYTVYN on 4/3/18.
+//
 
 #ifndef LEM_IN_H
-# define LEM_IN_H
+#define LEM_IN_H
 
-#include <stdlib.h>
-#include "/Users/dlytvyn/Lem-in/GNL/get_next_line.h"
-#include "/Users/dlytvyn/Lem-in/ft_printf/ft_printf/print.h"
-# include <stdlib.h>
-# include <unistd.h>
+# include <math.h>
 # include <fcntl.h>
-
-
-typedef struct      s_links
-{
-	int             r1;
-	int             r2;
-	struct s_links  *next;
-}                   t_links;
+# include <stdlib.h>
+# include "ft_printf/libft/libft.h"
+# include "GNL/get_next_line.h"
 
 typedef struct      s_rooms
 {
 	char            *name;
-	int             start;
-	int             end;
 	int             x;
 	int             y;
+	int             start;
+	int             end;
+	int             index;
 	struct s_rooms  *next;
+
 }                   t_rooms;
 
-typedef struct      s_st
+typedef struct      s_path
 {
+	int             in;
+	struct  s_path  *next;
+}                   t_path;
+
+typedef struct      s_ways
+{
+	struct s_path   *path;
+	struct s_ways   *next;
+}                   t_ways;
+
+typedef struct      s_gen
+{
+	int             fd;
 	int             ants;
-	t_rooms         *rooms;
-	t_links         *links;
-}                   t_st;
+	char            *map;
+	struct  s_rooms *rooms;
+	struct  s_rooms *rc;
+	int             **matrix;
+	int             size;
+}                   t_gen;
 
-typedef struct      s_read
-{
-	char            *row;
-	struct s_read   *next;
-}                   t_read;
+t_rooms *new_room();
+void    add_str(t_gen *st, char *line);
+int     array_len(char **array);
+void    free_array(char **array);
+void    get_data(char *line, t_gen *st);
+void    create_matrix(t_gen *st);
+void    ft_error(void);
+void    get_room_data(char *line, t_gen *st);
+void    get_link_data(char *line, t_gen *st);
 
-
-
-#endif
+#endif //LEM_IN_LEM_IN_H
