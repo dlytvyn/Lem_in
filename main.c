@@ -24,7 +24,7 @@ void    reader(t_gen *st)
 	ft_strdel(&line);
 	while (get_next_line(st->fd, &line))
 	{
-		get_data(line, st);
+		line = get_data(line, st);
 		add_str(st, line);
 		ft_strdel(&line);
 	}
@@ -46,5 +46,4 @@ int main(int argc, char **argv)
 	st.last = 0;
 	reader(&st);
 	order(&st);
-
 }

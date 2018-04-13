@@ -45,7 +45,7 @@ void    set_link(char **array, t_gen *st)
 	st->matrix[l2][l1] = 1;
 }
 
-void    get_link_data(char *line, t_gen *st)
+char    *get_link_data(char *line, t_gen *st)
 {
 	char **array;
 
@@ -55,4 +55,5 @@ void    get_link_data(char *line, t_gen *st)
 	check_name(array[0], st);
 	check_name(array[1], st);
 	set_link(array, st);
+	return (line);
 }

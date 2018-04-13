@@ -22,6 +22,7 @@ t_ways  *new_ways(void)
 	ways = (t_ways*)malloc(sizeof(t_ways));
 	ways->path = new_path();
 	ways->path_copy = ways->path;
+	ways->index = 0;
 	ways->next = NULL;
 	return (ways);
 }
@@ -43,6 +44,7 @@ t_rooms *new_room()
 	elem->start = 0;
 	elem->end = 0;
 	elem->index = 0;
+	elem->busy = 0;
 	elem->next = NULL;
 	return (elem);
 }

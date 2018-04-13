@@ -26,15 +26,16 @@ void    check_basic(t_gen *st)
 		ft_error();
 }
 
-void    get_data(char *line, t_gen *st)
+char    *get_data(char *line, t_gen *st)
 {
 	if (ft_strchr(line, '-'))
 	{
 		check_basic(st);
 		if (st->matrix == NULL)
 			create_matrix(st);
-		get_link_data(line, st);
+		line = get_link_data(line, st);
 	}
 	else
-		get_room_data(line, st);
+		line = get_room_data(line, st);
+	return (line);
 }
