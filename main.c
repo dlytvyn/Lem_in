@@ -44,6 +44,7 @@ int main(int argc, char **argv)
 	st.ways = NULL;
 	st.first = 0;
 	st.last = 0;
+	st.l = 1;
 	reader(&st);
 	order(&st);
 }

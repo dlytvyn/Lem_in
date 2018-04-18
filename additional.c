@@ -11,6 +11,7 @@ t_path  *new_path(void)
 	path = (t_path*)malloc(sizeof(t_path));
 	path->in = 0;
 	path->next = NULL;
+	path->name = NULL;
 	return (path);
 
 }
@@ -45,6 +46,7 @@ t_rooms *new_room()
 	elem->end = 0;
 	elem->index = 0;
 	elem->busy = 0;
+	elem->ant_num = 0;
 	elem->next = NULL;
 	return (elem);
 }

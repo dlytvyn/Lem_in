@@ -20,6 +20,7 @@ typedef struct      s_rooms
 	int             end;
 	int             index;
 	int             busy;
+	int             ant_num;
 	struct s_rooms  *next;
 
 }                   t_rooms;
@@ -52,6 +53,7 @@ typedef struct      s_gen
 	struct s_ways   *ways_copy;
 	int             first;
 	int             last;
+	int             l;
 }                   t_gen;
 
 t_rooms *new_room();
@@ -66,6 +68,7 @@ char    *get_link_data(char *line, t_gen *st);
 void    order(t_gen *st);
 t_ways  *new_ways(void);
 t_path  *new_path(void);
-void    movement(t_gen *st);
+void    search_ways(t_gen *st);
+int     path_num(t_gen *st);
 
 #endif //LEM_IN_LEM_IN_H

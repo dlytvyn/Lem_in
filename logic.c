@@ -39,7 +39,7 @@ int     path_num(t_gen *st)
 	res = 0;
 	while (j < st->size)
 	{
-		if (st->matrix[st->first][j] == 1)
+		if (st->matrix[st->first][j])
 			res++;
 		j++;
 	}
@@ -221,8 +221,7 @@ void    order(t_gen *st)
 
 
 	set_feromons(st);
-
-
+	search_ways(st);
 	st->ways = st->ways_copy;
 	i = 0;
 	int j = 0;
