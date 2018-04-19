@@ -53,7 +53,6 @@ typedef struct      s_gen
 	struct s_ways   *ways_copy;
 	int             first;
 	int             last;
-	int             l;
 }                   t_gen;
 
 t_rooms *new_room();

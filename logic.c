@@ -73,58 +73,6 @@ int     check_coor(t_gen *st, int j, int index)
 	return (1);
 }
 
-void    search_path(t_gen *st)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	st->ways->path->in = st->first;
-	while (j < st->size)
-	{
-		if (st->matrix[st->first][j] == 1)
-		{
-			if (check_coor(st, j, st->ways->index) == 1)
-			{
-				st->ways->path->next = new_path();
-				st->ways->path = st->ways->path->next;
-				st->ways->path->in = j;
-				break;
-			}
-		}
-		j++;
-	}
-	i = st->ways->path->in;
-	while (i < st->size)
-	{
-		(i == st->first) ? i++ : i;
-		j = 0;
-		while (j < st->size)
-		{
-			if (st->matrix[i][j] == 1)
-			{
-				if (check_coor(st, j, st->ways->index) == 1)
-				{
-					st->ways->path->next = new_path();
-					st->ways->path = st->ways->path->next;
-					st->ways->path->in = j;
-					i = st->ways->path->in;
-					break;
-				}
-				else if (st->ways->path->in == st->last)
-					return ;
-			}
-			if (j == st->size - 1)
-				i++;
-			j++;
-		}
-
-	}
-}
-
-
-
 double  search_greatest(t_gen *st, int i)
 {
 	int j;
@@ -212,17 +160,9 @@ void    order(t_gen *st)
 		i++;
 	}
 	st->ways = st->ways_copy;
-//	while (st->ways)
-//	{
-//		search_path(st);
-//		st->ways = st->ways->next;
-//	}
-
-
-
 	set_feromons(st);
 	search_ways(st);
-	st->ways = st->ways_copy;
+
 	i = 0;
 	int j = 0;
 	printf("\n");
@@ -236,5 +176,18 @@ void    order(t_gen *st)
 		}
 		i++;
 		printf("\n");
+	}
+	printf("\n");
+	st->ways = st->ways_copy;
+	while (st->ways)
+	{
+		st->ways->path = st->ways->path_copy;
+		while (st->ways->path)
+		{
+			printf("%s ", st->ways->path->name);
+			st->ways->path = st->ways->path->next;
+		}
+		printf("\n");
+		st->ways = st->ways->next;
 	}
 }

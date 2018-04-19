@@ -51,7 +51,7 @@ int     get_coor(t_gen *st, int i)
 
 	j = 0;
 	temp = 0;
-	res = 0;
+	res = -1;
 	while (j < st->size)
 	{
 		if (st->matrix[i][j] > temp && is_room_empty(st, j))
@@ -64,13 +64,53 @@ int     get_coor(t_gen *st, int i)
 	return (res);
 }
 
+void    clear_this_path(t_gen *st, t_ways *cp)
+{
+	t_path *tmp;
+
+	st->ways = cp;
+	st->ways->path = st->ways->path_copy;
+	while (st->ways->path)
+	{
+		tmp = st->ways->path->next;
+		free(st->ways->path->name);
+		free(st->ways->path);
+		st->ways->path = tmp;
+	}
+	st->ways->path = new_path();
+	st->ways->path_copy = st->ways->path;
+}
+
+void    check_empty_path(t_gen *st)
+{
+	st->ways = st->ways_copy;
+	while (st->ways)
+	{
+		st->ways->path = st->ways->path_copy;
+		if (st->ways->path->name == NULL)
+		{
+			free(st->ways->path);
+			st->ways->path = NULL;
+			st->ways->path_copy = NULL;
+			free(st->ways);
+			st->ways = NULL;
+			st->ways = st->ways_copy;
+			while (st->ways->next->next)
+				st->ways = st->ways->next;
+			st->ways->next = NULL;
+			return ;
+		}
+		st->ways = st->ways->next;
+	}
+}
+
 void    search_ways(t_gen *st)
 {
 	int     num;
 	int     i;
 	int     temp;
+	t_ways  *cp;
 
-	st->ways = new_ways();
 	num = path_num(st);
 	while (num > 0)
 	{
@@ -79,10 +119,16 @@ void    search_ways(t_gen *st)
 			st->ways->next = new_ways();
 			st->ways = st->ways->next;
 		}
+		cp = st->ways;
 		i = st->first;
+		set_room_busy(st, st->first, 1);
 		while (i != st->last)
 		{
-			temp = get_coor(st, i);
+			if ((temp = get_coor(st, i)) == -1)
+			{
+				clear_this_path(st, cp);
+				break;
+			}
 			set_room_busy(st, temp, 1);
 			if (st->ways->path->name)
 			{
@@ -98,6 +144,9 @@ void    search_ways(t_gen *st)
 			}
 			i = temp;
 		}
+		set_room_busy(st, st->first, 0);
+		set_room_busy(st, st->last, 0);
 		num--;
 	}
+	check_empty_path(st);
 }
