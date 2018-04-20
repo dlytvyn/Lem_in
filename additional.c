@@ -10,7 +10,9 @@ t_path  *new_path(void)
 
 	path = (t_path*)malloc(sizeof(t_path));
 	path->in = 0;
+	path->ant = 0;
 	path->next = NULL;
+	path->prev = NULL;
 	path->name = NULL;
 	return (path);
 
@@ -24,7 +26,9 @@ t_ways  *new_ways(void)
 	ways->path = new_path();
 	ways->path_copy = ways->path;
 	ways->index = 0;
+	ways->len = 0;
 	ways->next = NULL;
+	ways->prev = NULL;
 	return (ways);
 }
 

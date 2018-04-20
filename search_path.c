@@ -104,11 +104,48 @@ void    check_empty_path(t_gen *st)
 	}
 }
 
+void    last_way(t_gen *st)
+{
+	st->ways = st->ways_copy;
+	while (st->ways->next)
+		st->ways = st->ways->next;
+	st->last_way = st->ways;
+}
+
+void    last_path(t_gen *st)
+{
+	st->ways = st->ways_copy;
+	while (st->ways)
+	{
+		while (st->ways->path->next)
+			st->ways->path = st->ways->path->next;
+		st->ways->last_path = st->ways->path;
+		st->ways = st->ways->next;
+	}
+}
+
+void    ways_len(t_gen *st)
+{
+	st->ways = st->ways_copy;
+	while (st->ways)
+	{
+		st->ways->path = st->ways->path_copy;
+		while (st->ways->path)
+		{
+			st->ways->len++;
+			st->ways->path = st->ways->path->next;
+		}
+		st->ways = st->ways->next;
+	}
+}
+
 void    search_ways(t_gen *st)
 {
 	int     num;
 	int     i;
 	int     temp;
+	t_ways  *prev;
+	t_path  *pr;
 	t_ways  *cp;
 
 	num = path_num(st);
@@ -117,7 +154,9 @@ void    search_ways(t_gen *st)
 		if (st->ways->path->name)
 		{
 			st->ways->next = new_ways();
+			prev = st->ways;
 			st->ways = st->ways->next;
+			st->ways->prev = prev;
 		}
 		cp = st->ways;
 		i = st->first;
@@ -133,7 +172,9 @@ void    search_ways(t_gen *st)
 			if (st->ways->path->name)
 			{
 				st->ways->path->next = new_path();
+				pr = st->ways->path;
 				st->ways->path = st->ways->path->next;
+				st->ways->path->prev = pr;
 				st->ways->path->in = temp;
 				st->ways->path->name = get_name(st, temp);
 			}
@@ -149,4 +190,7 @@ void    search_ways(t_gen *st)
 		num--;
 	}
 	check_empty_path(st);
+	last_way(st);
+	last_path(st);
+	ways_len(st);
 }

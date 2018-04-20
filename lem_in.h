@@ -29,14 +29,19 @@ typedef struct      s_path
 {
 	int             in;
 	char            *name;
+	int             ant;
 	struct  s_path  *next;
+	struct  s_path  *prev;
 }                   t_path;
 
 typedef struct      s_ways
 {
 	struct s_path   *path;
-	struct  s_path  *path_copy;
+	struct s_path   *path_copy;
+	struct s_path   *last_path;
 	int             index;
+	int             len;
+	struct s_ways   *prev;
 	struct s_ways   *next;
 }                   t_ways;
 
@@ -53,6 +58,7 @@ typedef struct      s_gen
 	struct s_ways   *ways_copy;
 	int             first;
 	int             last;
+	struct s_ways   *last_way;
 }                   t_gen;
 
 t_rooms *new_room();
@@ -69,5 +75,7 @@ t_ways  *new_ways(void);
 t_path  *new_path(void);
 void    search_ways(t_gen *st);
 int     path_num(t_gen *st);
+void    define_ways(t_gen *st);
+void    motion(t_gen *st);
 
 #endif //LEM_IN_LEM_IN_H
