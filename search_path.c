@@ -15,6 +15,7 @@ char    *get_name(t_gen *st, int room)
 			return (st->rooms->name);
 		st->rooms = st->rooms->next;
 	}
+	return (NULL);
 }
 
 void    set_room_busy(t_gen *st, int room, int busy)

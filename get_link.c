@@ -30,6 +30,7 @@ int     search_in(char *name, t_gen *st)
 			return (st->rooms->index);
 		st->rooms = st->rooms->next;
 	}
+	return (0);
 }
 
 void    set_link(char **array, t_gen *st)

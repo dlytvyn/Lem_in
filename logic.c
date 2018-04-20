@@ -15,6 +15,7 @@ int     search_first(t_gen *st)
 			return (st->rooms->index);
 		st->rooms = st->rooms->next;
 	}
+	return (0);
 }
 
 int     search_last(t_gen *st)
@@ -26,6 +27,7 @@ int     search_last(t_gen *st)
 			return (st->rooms->index);
 		st->rooms = st->rooms->next;
 	}
+	return (0);
 }
 
 int     path_num(t_gen *st)
@@ -116,10 +118,6 @@ void    set_feromons(t_gen *st)
 
 void    order(t_gen *st)
 {
-	int i;
-
-	i = 1;
-
 	st->first = search_first(st);
 	st->last = search_last(st);
 	st->ways = new_ways();
@@ -127,32 +125,6 @@ void    order(t_gen *st)
 	set_feromons(st);
 	search_ways(st);
 	define_ways(st);
+	printf("%s\n\n", st->map);
 	motion(st);
-	i = 0;
-	int j = 0;
-	printf("\n");
-	while (i < st->size)
-	{
-		j = 0;
-		while (j < st->size)
-		{
-			printf("%f ", st->matrix[i][j]);
-			j++;
-		}
-		i++;
-		printf("\n");
-	}
-	printf("\n");
-	st->ways = st->ways_copy;
-	while (st->ways) {
-		st->ways->path = st->ways->path_copy;
-		while (st->ways->path) {
-			printf("%s ", st->ways->path->name);
-			st->ways->path = st->ways->path->next;
-		}
-		printf("\n");
-		printf("len: %d\n", st->ways->len);
-		printf("index: %d\n", st->ways->index);
-		st->ways = st->ways->next;
-	}
 }

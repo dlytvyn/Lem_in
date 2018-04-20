@@ -15,6 +15,7 @@ int     move_path(t_gen *st, int finish)
 		if (st->ways->path == st->ways->last_path && st->ways->path->ant)
 			finish++;
 		st->ways->path->ant = st->ways->path->prev->ant;
+		st->ways->path->prev->ant = 0;
 		st->ways->path = st->ways->path->prev;
 	}
 	return (finish);
@@ -22,19 +23,25 @@ int     move_path(t_gen *st, int finish)
 
 void    print(t_gen *st)
 {
+	int i;
+
 	st->ways = st->ways_copy;
 	while (st->ways)
 	{
+		i = 0;
 		st->ways->path = st->ways->last_path;
 		while (st->ways->path)
 		{
 			if (st->ways->path->ant)
-				printf("L%d-%s", st->ways->path->ant, st->ways->path->name);                                             // change it
-			if (st->ways->path->prev && st->ways->path->ant)
+			{
+				printf("L%d-%s", st->ways->path->ant, st->ways->path->name);                                           // change this
+				i++;
+			}
+			if (st->ways->path->prev && st->ways->path->prev->ant && st->ways->path->ant)
 				printf(" ");
 			st->ways->path = st->ways->path->prev;
 		}
-		if (st->ways->next)
+		if (st->ways->next && i > 0)
 			printf(" ");
 		st->ways = st->ways->next;
 	}
@@ -62,6 +69,8 @@ void    motion(t_gen *st)
 			}
 			st->ways = st->ways->next;
 		}
+		if (finish == st->ants)
+			return ;
 		print(st);
 	}
 }
@@ -84,21 +93,23 @@ void    define_ways(t_gen *st)
 {
 	while (sum(st) < st->ants)
 	{
+		printf("here\n");
 		st->ways = st->last_way;
-		while (st->ways->prev)
+		if (path_num(st) > 1)
 		{
-			if ((st->ways->prev->index - st->ways->index) >= (st->ways->len - st->ways->prev->len))
-			{
-				st->ways->index++;
-				break ;
-			}
-			else
-				st->ways = st->ways->prev;
-			if (st->ways->prev == NULL)
-			{
-				st->ways->index++;
-				break ;
+			while (st->ways->prev) {
+				if ((st->ways->prev->index - st->ways->index) >= (st->ways->len - st->ways->prev->len)) {
+					st->ways->index++;
+					break;
+				} else
+					st->ways = st->ways->prev;
+				if (st->ways->prev == NULL) {
+					st->ways->index++;
+					break;
+				}
 			}
 		}
+		else
+			st->ways->index = st->ants;
 	}
 }
