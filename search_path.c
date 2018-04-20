@@ -96,8 +96,6 @@ void    check_empty_path(t_gen *st)
 			free(st->ways);
 			st->ways = NULL;
 			st->ways = st->ways_copy;
-			while (st->ways->next->next)
-				st->ways = st->ways->next;
 			st->ways->next = NULL;
 			return ;
 		}
@@ -118,6 +116,7 @@ void    last_path(t_gen *st)
 	st->ways = st->ways_copy;
 	while (st->ways)
 	{
+		st->ways->path = st->ways->path_copy;
 		while (st->ways->path->next)
 			st->ways->path = st->ways->path->next;
 		st->ways->last_path = st->ways->path;
@@ -150,6 +149,11 @@ void    search_ways(t_gen *st)
 	t_ways  *cp;
 
 	num = path_num(st);
+	if (num == 0)
+	{
+		printf("There is no solution\n");                          // change this
+		exit(0);
+	}
 	while (num > 0)
 	{
 		if (st->ways->path->name)

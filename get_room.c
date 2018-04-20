@@ -9,7 +9,7 @@ int    check_room(char *line)
 	int i;
 
 	i = 0;
-	while (line[i] && (ft_isdigit(line[i]) || ft_isalpha(line[i])))
+	while (line[i] && line[i] != ' ')
 		i++;
 	if (line[i] == '\0')
 		return (0);

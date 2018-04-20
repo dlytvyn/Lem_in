@@ -122,9 +122,23 @@ void    order(t_gen *st)
 	st->last = search_last(st);
 	st->ways = new_ways();
 	st->ways_copy = st->ways;
-	set_feromons(st);
-	search_ways(st);
-	define_ways(st);
-	printf("%s\n\n", st->map);
-	motion(st);
+//	set_feromons(st);
+//	search_ways(st);
+//	define_ways(st);
+//	printf("%s\n\n", st->map);
+//	motion(st);
+
+	int i = 0;
+	int j = 0;
+	while  (i < st->size)
+	{
+		j = 0;
+		while (j <st->size)
+		{
+			printf("%f ", st->matrix[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 }

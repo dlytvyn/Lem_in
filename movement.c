@@ -89,14 +89,28 @@ int     sum(t_gen *st)
 	return (res);
 }
 
+int     real_ways(t_gen *st)
+{
+	int res;
+
+	res = 0;
+	st->ways = st->ways_copy;
+	while (st->ways)
+	{
+		res++;
+		st->ways = st->ways->next;
+	}
+	return (res);
+}
+
 void    define_ways(t_gen *st)
 {
 	while (sum(st) < st->ants)
 	{
 		printf("here\n");
-		st->ways = st->last_way;
-		if (path_num(st) > 1)
+		if (real_ways(st) > 1)
 		{
+			st->ways = st->last_way;
 			while (st->ways->prev) {
 				if ((st->ways->prev->index - st->ways->index) >= (st->ways->len - st->ways->prev->len)) {
 					st->ways->index++;
@@ -110,6 +124,9 @@ void    define_ways(t_gen *st)
 			}
 		}
 		else
+		{
+			st->ways = st->ways_copy;
 			st->ways->index = st->ants;
+		}
 	}
 }
