@@ -58,6 +58,7 @@ typedef struct      s_gen
 	struct s_ways   *ways_copy;
 	int             first;
 	int             last;
+	int             weight;
 	struct s_ways   *last_way;
 }                   t_gen;
 
@@ -77,5 +78,8 @@ void    search_ways(t_gen *st);
 int     path_num(t_gen *st);
 void    define_ways(t_gen *st);
 void    motion(t_gen *st);
+void    set_room_busy(t_gen *st, int room, int busy);
+int     is_room_empty(t_gen *st, int room);
+int     get_greatest(t_gen *st, int i);
 
 #endif //LEM_IN_LEM_IN_H

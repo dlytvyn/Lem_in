@@ -45,6 +45,7 @@ int main(int argc, char **argv)
 	st.first = 0;
 	st.last = 0;
 	st.last_way = NULL;
+	st.weight = 1;
 	reader(&st);
 	order(&st);
 }

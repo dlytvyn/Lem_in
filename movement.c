@@ -107,17 +107,20 @@ void    define_ways(t_gen *st)
 {
 	while (sum(st) < st->ants)
 	{
-		printf("here\n");
 		if (real_ways(st) > 1)
 		{
 			st->ways = st->last_way;
-			while (st->ways->prev) {
-				if ((st->ways->prev->index - st->ways->index) >= (st->ways->len - st->ways->prev->len)) {
+			while (st->ways->prev)
+			{
+				if ((st->ways->prev->index - st->ways->index) >= (st->ways->len - st->ways->prev->len))
+				{
 					st->ways->index++;
 					break;
-				} else
+				}
+				else
 					st->ways = st->ways->prev;
-				if (st->ways->prev == NULL) {
+				if (st->ways->prev == NULL)
+				{
 					st->ways->index++;
 					break;
 				}

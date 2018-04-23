@@ -51,11 +51,11 @@ int     get_coor(t_gen *st, int i)
 	int res;
 
 	j = 0;
-	temp = 0;
+	temp = get_greatest(st, i);
 	res = -1;
 	while (j < st->size)
 	{
-		if (st->matrix[i][j] > temp && is_room_empty(st, j))
+		if (st->matrix[i][j] != 0 && st->matrix[i][j] <= temp && is_room_empty(st, j))
 		{
 			temp = st->matrix[i][j];
 			res = j;
