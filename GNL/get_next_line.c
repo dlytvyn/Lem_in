@@ -35,7 +35,10 @@ static	char	*ft_change(t_list *run, int i)
 		temp = (char*)malloc(sizeof(char) * ft_strlen(run->content + i));
 	}
 	else
+	{
+		ft_memdel(&run->content);
 		return (ft_strdup("\0"));
+	}
 	ft_strcpy(temp, run->content + ++i);
 	if (run->content)
 		ft_bzero(run->content, ft_strlen(run->content));
@@ -79,7 +82,8 @@ static	t_list	*search_in_list(t_list *head, int fd)
 	}
 	while (head->next)
 		head = head->next;
-	head->next = ft_lstnew("\0", fd);
+	head->next = ft_lstnew("\0", 1);
+	head->next->content_size = fd;
 	return (head->next);
 }
 
@@ -94,7 +98,10 @@ int				get_next_line(const int fd, char **line)
 		return (-1);
 	*line = NULL;
 	if (!head)
-		head = ft_lstnew("\0", fd);
+	{
+		head = ft_lstnew("\0", 1);
+		head->content_size = fd;
+	}
 	run = head;
 	run = search_in_list(head, fd);
 	if (((char*)run->content)[0] != '\0' && is_text(run, line, 1) == 1)
