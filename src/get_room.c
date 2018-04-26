@@ -87,15 +87,6 @@ char	*get_room_data(char *line, t_gen *st)
 {
 	char **array;
 
-	if (line[0] == '#' && ft_strcmp(line, "##start") != 0
-		&& ft_strcmp(line, "##end") != 0)
-	{
-		add_str(st, line);
-		ft_strdel(&line);
-		get_next_line(st->fd, &line);
-		line = get_data(line, st);
-		return (line);
-	}
 	if (st->rooms->name != NULL)
 	{
 		st->rooms->next = new_room();
