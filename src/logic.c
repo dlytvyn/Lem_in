@@ -1,69 +1,21 @@
-//
-// Created by Dmytro LYTVYN on 4/4/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   logic.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlytvyn <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 12:48:12 by dlytvyn           #+#    #+#             */
+/*   Updated: 2018/04/26 12:48:13 by dlytvyn          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lem_in.h"
 
-#include <stdio.h>
-
-int     search_first(t_gen *st)
+int		*search_elem(t_gen *st, int *stack, int row)
 {
-	st->rooms = st->rc;
-	while (st->rooms)
-	{
-		if (st->rooms->start == 1)
-			return (st->rooms->index);
-		st->rooms = st->rooms->next;
-	}
-	return (0);
-}
-
-int     search_last(t_gen *st)
-{
-	st->rooms = st->rc;
-	while (st->rooms)
-	{
-		if (st->rooms->end == 1)
-			return (st->rooms->index);
-		st->rooms = st->rooms->next;
-	}
-	return (0);
-}
-
-int     path_num(t_gen *st)
-{
-	int j;
-	int res;
-
-	j = 0;
-	res = 0;
-	while (j < st->size)
-	{
-		if (st->matrix[st->first][j])
-			res++;
-		j++;
-	}
-	return (res);
-}
-
-int     room_in_stack(int *stack, int j)
-{
-	int i;
-
-	i = 0;
-	while (stack[i])
-	{
-		if (stack[i] == j)
-			return  (1);
-		i++;
-	}
-	return (0);
-}
-
-int     *search_elem(t_gen *st, int* stack, int row)
-{
-	int j;
-	int k;
+	int	j;
+	int	k;
 
 	j = 0;
 	while (j < st->size)
@@ -85,9 +37,9 @@ int     *search_elem(t_gen *st, int* stack, int row)
 	return (stack);
 }
 
-int     *set_stack(t_gen *st, int *stack)
+int		*set_stack(t_gen *st, int *stack)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < st->size)
@@ -98,27 +50,25 @@ int     *set_stack(t_gen *st, int *stack)
 	return (stack);
 }
 
-int     get_greatest(t_gen *st, int i)
+int		room_in_stack(int *stack, int j)
 {
-	int j;
-	int res;
+	int	i;
 
-	j = 0;
-	res = 0;
-	while (j < st->size)
+	i = 0;
+	while (stack[i])
 	{
-		if (st->matrix[i][j] > res)
-			res = st->matrix[i][j];
-		j++;
+		if (stack[i] == j)
+			return (1);
+		i++;
 	}
-	return (res);
+	return (0);
 }
 
-void    stack_creator(t_gen *st)
+void	stack_creator(t_gen *st)
 {
-	int     *stack;
-	int     k;
-	int     i;
+	int	*stack;
+	int	k;
+	int	i;
 
 	k = 0;
 	stack = (int*)malloc(sizeof(int) * st->size);
@@ -134,17 +84,7 @@ void    stack_creator(t_gen *st)
 	}
 }
 
-void    empty_rooms(t_gen *st)
-{
-	st->rooms = st->rc;
-	while (st->rooms)
-	{
-		st->rooms->busy = 0;
-		st->rooms = st->rooms->next;
-	}
-}
-
-void    order(t_gen *st)
+void	order(t_gen *st)
 {
 	st->first = search_first(st);
 	st->last = search_last(st);
@@ -154,6 +94,6 @@ void    order(t_gen *st)
 	empty_rooms(st);
 	search_ways(st);
 	define_ways(st);
-	printf("%s\n\n", st->map);
+	ft_printf("%s\n\n", st->map);
 	motion(st);
 }

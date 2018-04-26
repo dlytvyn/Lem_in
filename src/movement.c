@@ -1,13 +1,18 @@
-//
-// Created by Dmytro LYTVYN on 4/20/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlytvyn <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 12:49:06 by dlytvyn           #+#    #+#             */
+/*   Updated: 2018/04/26 12:49:07 by dlytvyn          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lem_in.h"
 
-
-#include <stdio.h>
-
-int     move_path(t_gen *st, int finish)
+int		move_path(t_gen *st, int finish)
 {
 	st->ways->path = st->ways->last_path;
 	while (st->ways->path->prev)
@@ -21,9 +26,9 @@ int     move_path(t_gen *st, int finish)
 	return (finish);
 }
 
-void    print(t_gen *st)
+void	print(t_gen *st)
 {
-	int i;
+	int	i;
 
 	st->ways = st->ways_copy;
 	while (st->ways)
@@ -34,24 +39,25 @@ void    print(t_gen *st)
 		{
 			if (st->ways->path->ant)
 			{
-				printf("L%d-%s", st->ways->path->ant, st->ways->path->name);                                           // change this
+				ft_printf("L%d-%s", st->ways->path->ant, st->ways->path->name);
 				i++;
 			}
-			if (st->ways->path->prev && st->ways->path->prev->ant && st->ways->path->ant)
-				printf(" ");
+			if (st->ways->path->prev && st->ways->path->prev->ant
+				&& st->ways->path->ant)
+				ft_printf(" ");
 			st->ways->path = st->ways->path->prev;
 		}
 		if (st->ways->next && i > 0)
-			printf(" ");
+			ft_printf(" ");
 		st->ways = st->ways->next;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
-void    motion(t_gen *st)
+void	motion(t_gen *st)
 {
-	int count;
-	int finish;
+	int	count;
+	int	finish;
 
 	count = 1;
 	finish = 0;
@@ -75,9 +81,9 @@ void    motion(t_gen *st)
 	}
 }
 
-int     sum(t_gen *st)
+int		sum(t_gen *st)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	st->ways = st->ways_copy;
@@ -89,9 +95,9 @@ int     sum(t_gen *st)
 	return (res);
 }
 
-int     real_ways(t_gen *st)
+int		real_ways(t_gen *st)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	st->ways = st->ways_copy;
@@ -103,7 +109,13 @@ int     real_ways(t_gen *st)
 	return (res);
 }
 
-void    define_ways(t_gen *st)
+void	helping(t_gen *st)
+{
+	st->ways = st->ways_copy;
+	st->ways->index = st->ants;
+}
+
+void	define_ways(t_gen *st)
 {
 	while (sum(st) < st->ants)
 	{
@@ -112,24 +124,22 @@ void    define_ways(t_gen *st)
 			st->ways = st->last_way;
 			while (st->ways->prev)
 			{
-				if ((st->ways->prev->index - st->ways->index) >= (st->ways->len - st->ways->prev->len))
+				if ((st->ways->prev->index - st->ways->index) >=
+					(st->ways->len - st->ways->prev->len))
 				{
 					st->ways->index++;
-					break;
+					break ;
 				}
 				else
 					st->ways = st->ways->prev;
 				if (st->ways->prev == NULL)
 				{
 					st->ways->index++;
-					break;
+					break ;
 				}
 			}
 		}
 		else
-		{
-			st->ways = st->ways_copy;
-			st->ways->index = st->ants;
-		}
+			helping(st);
 	}
 }

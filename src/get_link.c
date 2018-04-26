@@ -1,12 +1,20 @@
-//
-// Created by Dmytro LYTVYN on 4/4/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_link.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlytvyn <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 12:47:44 by dlytvyn           #+#    #+#             */
+/*   Updated: 2018/04/26 12:47:46 by dlytvyn          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lem_in.h"
 
-void    check_name(char *name, t_gen *st)
+void	check_name(char *name, t_gen *st)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	st->rooms = st->rc;
@@ -20,10 +28,9 @@ void    check_name(char *name, t_gen *st)
 		ft_error();
 }
 
-
-int     search_in(char *name, t_gen *st)
+int		search_in(char *name, t_gen *st)
 {
-	st->rooms= st->rc;
+	st->rooms = st->rc;
 	while (st->rooms)
 	{
 		if (ft_strcmp(st->rooms->name, name) == 0)
@@ -33,10 +40,10 @@ int     search_in(char *name, t_gen *st)
 	return (0);
 }
 
-void    set_link(char **array, t_gen *st)
+void	set_link(char **array, t_gen *st)
 {
-	int l1;
-	int l2;
+	int	l1;
+	int	l2;
 
 	l1 = search_in(array[0], st);
 	l2 = search_in(array[1], st);
@@ -46,9 +53,9 @@ void    set_link(char **array, t_gen *st)
 	st->matrix[l2][l1] = 1;
 }
 
-char    *get_link_data(char *line, t_gen *st)
+char	*get_link_data(char *line, t_gen *st)
 {
-	char **array;
+	char	**array;
 
 	array = ft_strsplit(line, '-');
 	if (array_len(array) != 2)

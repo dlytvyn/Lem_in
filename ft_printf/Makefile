@@ -16,32 +16,32 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -Iincludes
 
-FT_PRINTF = ./ft_printf/ft_printf.c\
-		./ft_printf/ft_al.c\
-        ./ft_printf/type_of_data.c\
-        ./ft_printf/parse.c\
-        ./ft_printf/ft_puttext.c\
-        ./ft_printf/ft_char_type.c\
-		./ft_printf/print_cs.c\
-        ./ft_printf/ft_atoi_n.c\
-        ./ft_printf/ft_realloc.c\
-        ./ft_printf/ft_newlist.c\
-        ./ft_printf/ft_clear.c\
-        ./ft_printf/ft_pointer.c\
-        ./ft_printf/ft_len.c\
-        ./ft_printf/search_base.c\
-		./ft_printf/colors.c\
-        ./ft_printf/ft_itoa_base.c\
-		./ft_printf/ft_realloc_cat.c\
-		./ft_printf/get_format.c\
-        ./ft_printf/new_format.c\
-        ./ft_printf/unicode.c\
-        ./ft_printf/ft_itoa_base_sign.c\
-        ./ft_printf/get_format_2.c\
-        ./ft_printf/unicode_write.c\
-        ./ft_printf/unicode_len.c\
-        ./ft_printf/ft_typing.c\
-        ./ft_printf/if_not_minus.c\
+FT_PRINTF = ./src/ft_printf.c\
+		./src/ft_al.c\
+        ./src/type_of_data.c\
+        ./src/parse.c\
+        ./src/ft_puttext.c\
+        ./src/ft_char_type.c\
+		./src/print_cs.c\
+        ./src/ft_atoi_n.c\
+        ./src/ft_realloc.c\
+        ./src/ft_newlist.c\
+        ./src/ft_clear.c\
+        ./src/ft_pointer.c\
+        ./src/ft_len.c\
+        ./src/search_base.c\
+		./src/colors.c\
+		./src/ft_realloc_cat.c\
+		./src/get_format.c\
+        ./src/new_format.c\
+        ./src/unicode.c\
+        ./src/ft_itoa_base.c\
+        ./src/ft_itoa_base_sign.c\
+        ./src/get_format_2.c\
+        ./src/unicode_write.c\
+        ./src/unicode_len.c\
+        ./src/ft_typing.c\
+        ./src/if_not_minus.c\
 
 LIBFT = ./libft/ft_memset.c\
 		./libft/ft_bzero.c\
@@ -94,7 +94,9 @@ LIBFT = ./libft/ft_memset.c\
 		./libft/ft_lstadd.c\
 		./libft/ft_lstiter.c\
 		./libft/ft_lstmap.c\
+		./libft/ft_strsplit.c\
 		./libft/ft_itoa.c\
+		./libft/get_next_line.c\
 
 LIBFT_OBJ = $(LIBFT:.c=.o)
 

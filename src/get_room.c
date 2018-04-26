@@ -1,12 +1,20 @@
-//
-// Created by Dmytro LYTVYN on 4/4/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_room.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlytvyn <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 12:47:59 by dlytvyn           #+#    #+#             */
+/*   Updated: 2018/04/26 12:48:00 by dlytvyn          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lem_in.h"
 
-int    check_room(char *line)
+int		check_room(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] && line[i] != ' ')
@@ -33,8 +41,7 @@ int    check_room(char *line)
 		return (0);
 }
 
-
-int     check_same_coor(t_gen *st, int x, int y)
+int		check_same_coor(t_gen *st, int x, int y)
 {
 	st->rooms = st->rc;
 	while (st->rooms->next)
@@ -48,7 +55,7 @@ int     check_same_coor(t_gen *st, int x, int y)
 	return (1);
 }
 
-int     check_start(t_gen *st)
+int		check_start(t_gen *st)
 {
 	st->rooms = st->rc;
 	while (st->rooms->next)
@@ -62,7 +69,7 @@ int     check_start(t_gen *st)
 	return (1);
 }
 
-int     check_end(t_gen *st)
+int		check_end(t_gen *st)
 {
 	st->rooms = st->rc;
 	while (st->rooms->next)
@@ -76,11 +83,12 @@ int     check_end(t_gen *st)
 	return (1);
 }
 
-char    *get_room_data(char *line, t_gen *st)
+char	*get_room_data(char *line, t_gen *st)
 {
 	char **array;
 
-	if (line[0] == '#' && ft_strcmp(line, "##start") != 0 && ft_strcmp(line, "##end") != 0)
+	if (line[0] == '#' && ft_strcmp(line, "##start") != 0
+		&& ft_strcmp(line, "##end") != 0)
 	{
 		add_str(st, line);
 		ft_strdel(&line);

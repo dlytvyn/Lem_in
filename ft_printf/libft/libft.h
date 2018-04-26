@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <ctype.h>
+# include "get_next_line.h"
 
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);

@@ -1,12 +1,20 @@
-//
-// Created by Dmytro LYTVYN on 4/4/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   additional.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlytvyn <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 12:47:22 by dlytvyn           #+#    #+#             */
+/*   Updated: 2018/04/26 12:47:24 by dlytvyn          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_path  *new_path(void)
+t_path	*new_path(void)
 {
-	t_path  *path;
+	t_path	*path;
 
 	path = (t_path*)malloc(sizeof(t_path));
 	path->in = 0;
@@ -15,12 +23,11 @@ t_path  *new_path(void)
 	path->prev = NULL;
 	path->name = NULL;
 	return (path);
-
 }
 
-t_ways  *new_ways(void)
+t_ways	*new_ways(void)
 {
-	t_ways  *ways;
+	t_ways	*ways;
 
 	ways = (t_ways*)malloc(sizeof(t_ways));
 	ways->path = new_path();
@@ -32,15 +39,15 @@ t_ways  *new_ways(void)
 	return (ways);
 }
 
-void    ft_error(void)
+void	ft_error(void)
 {
 	write(1, "Map Error\n", 10);
 	exit(0);
 }
 
-t_rooms *new_room()
+t_rooms	*new_room(void)
 {
-	t_rooms *elem;
+	t_rooms	*elem;
 
 	elem = (t_rooms*)malloc(sizeof(t_rooms));
 	elem->x = 0;
@@ -55,33 +62,9 @@ t_rooms *new_room()
 	return (elem);
 }
 
-void    add_str(t_gen *st, char *line)
+void	free_array(char **array)
 {
-	char    *tmp;
-
-	tmp = ft_strdup(st->map);
-	ft_strdel(&st->map);
-	st->map = ft_strjoin(tmp, "\n");
-	ft_strdel(&tmp);
-	tmp = ft_strdup(st->map);
-	ft_strdel(&st->map);
-	st->map = ft_strjoin(tmp, line);
-	ft_strdel(&tmp);
-}
-
-int     array_len(char **array)
-{
-	int i;
-
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
-}
-
-void    free_array(char **array)
-{
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i])

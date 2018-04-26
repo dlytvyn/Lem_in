@@ -1,13 +1,21 @@
-//
-// Created by Dmytro LYTVYN on 4/4/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlytvyn <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 12:48:47 by dlytvyn           #+#    #+#             */
+/*   Updated: 2018/04/26 12:48:48 by dlytvyn          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lem_in.h"
 
-void    set_zero(t_gen *st)
+void	set_zero(t_gen *st)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < st->size)
@@ -22,9 +30,9 @@ void    set_zero(t_gen *st)
 	}
 }
 
-void    create_matrix(t_gen *st)
+void	create_matrix(t_gen *st)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	st->rooms = st->rc;
@@ -35,7 +43,7 @@ void    create_matrix(t_gen *st)
 		ft_error();
 	while (i < st->size)
 	{
-		if(!(st->matrix[i] = (double*)malloc(sizeof(double) * st->size)))
+		if (!(st->matrix[i] = (double*)malloc(sizeof(double) * st->size)))
 			ft_error();
 		i++;
 	}
