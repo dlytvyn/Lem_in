@@ -50,8 +50,8 @@ t_rooms	*new_room(void)
 	t_rooms	*elem;
 
 	elem = (t_rooms*)malloc(sizeof(t_rooms));
-	elem->x = 0;
-	elem->y = 0;
+	elem->x = -1;
+	elem->y = -1;
 	elem->name = NULL;
 	elem->start = 0;
 	elem->end = 0;

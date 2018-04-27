@@ -81,34 +81,6 @@ void	motion(t_gen *st)
 	}
 }
 
-int		sum(t_gen *st)
-{
-	int	res;
-
-	res = 0;
-	st->ways = st->ways_copy;
-	while (st->ways)
-	{
-		res += st->ways->index;
-		st->ways = st->ways->next;
-	}
-	return (res);
-}
-
-int		real_ways(t_gen *st)
-{
-	int	res;
-
-	res = 0;
-	st->ways = st->ways_copy;
-	while (st->ways)
-	{
-		res++;
-		st->ways = st->ways->next;
-	}
-	return (res);
-}
-
 void	helping(t_gen *st)
 {
 	st->ways = st->ways_copy;

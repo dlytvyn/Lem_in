@@ -14,7 +14,7 @@
 
 #include "stdio.h"
 
-void    check_basic(t_gen *st)
+void	check_basic(t_gen *st)
 {
 	int start;
 	int end;
@@ -34,8 +34,17 @@ void    check_basic(t_gen *st)
 		ft_error();
 }
 
-char    *get_data(char *line, t_gen *st)
+char	*get_data(char *line, t_gen *st)
 {
+	if (line[0] == '#' && ft_strcmp(line, "##start") != 0
+		&& ft_strcmp(line, "##end") != 0)
+	{
+		add_str(st, line);
+		ft_strdel(&line);
+		get_next_line(st->fd, &line);
+		line = get_data(line, st);
+		return (line);
+	}
 	if (ft_strchr(line, '-'))
 	{
 		check_basic(st);

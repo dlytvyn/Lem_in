@@ -68,15 +68,15 @@ void	stack_creator(t_gen *st)
 {
 	int	*stack;
 	int	k;
-	int	i;
 
 	k = 0;
 	stack = (int*)malloc(sizeof(int) * st->size);
-	i = st->last;
 	stack = set_stack(st, stack);
 	stack[k] = st->last;
 	while (k < st->size)
 	{
+		if (stack[k] == -1)
+			break ;
 		stack = search_elem(st, stack, stack[k]);
 		set_room_busy(st, stack[k], 1);
 		st->weight = get_greatest(st, k) + 1;

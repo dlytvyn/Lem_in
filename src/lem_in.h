@@ -65,6 +65,8 @@ typedef struct		s_gen
 	int				first;
 	int				last;
 	int				weight;
+	int				num;
+	int				temp;
 	struct s_ways	*last_way;
 }					t_gen;
 
@@ -91,5 +93,14 @@ int					room_in_stack(int *stack, int j);
 int					search_last(t_gen *st);
 int					search_first(t_gen *st);
 void				empty_rooms(t_gen *st);
+int					sum(t_gen *st);
+int					real_ways(t_gen *st);
+char				*get_name(t_gen *st, int room);
+void				last_way(t_gen *st);
+void				last_path(t_gen *st);
+int					check_end(t_gen *st);
+int					check_start(t_gen *st);
+void				clear_this_path(t_gen *st, t_ways *cp);
+void				check_empty_path(t_gen *st);
 
 #endif
