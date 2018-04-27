@@ -37,7 +37,11 @@ void	check_basic(t_gen *st)
 char	*get_data(char *line, t_gen *st)
 {
 	if (line[0] == '#' && ft_strcmp(line, "##start") != 0
+<<<<<<< HEAD
 		&& ft_strcmp(line, "##end") != 0)
+=======
+	    && ft_strcmp(line, "##end") != 0)
+>>>>>>> 8cbf696e2de841a73e528ad44f160f80bc153ba9
 	{
 		add_str(st, line);
 		ft_strdel(&line);
