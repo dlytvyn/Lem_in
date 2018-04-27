@@ -49,6 +49,8 @@ void	set_link(char **array, t_gen *st)
 	l2 = search_in(array[1], st);
 	if (l1 == l2)
 		ft_error();
+//	if (st->matrix[l1][l2] && st->matrix[l2][l1] == 1)
+//		ft_error();
 	st->matrix[l1][l2] = 1;
 	st->matrix[l2][l1] = 1;
 }

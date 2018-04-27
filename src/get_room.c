@@ -57,45 +57,6 @@ int		check_same_coor(t_gen *st, int x, int y)
 
 char	*get_room_data_add(char *line, t_gen *st)
 {
-<<<<<<< HEAD
-=======
-	st->rooms = st->rc;
-	while (st->rooms->next)
-	{
-		if (st->rooms->start)
-			return (0);
-		st->rooms = st->rooms->next;
-	}
-	if (st->rooms->start)
-		return (0);
-	return (1);
-}
-
-int		check_end(t_gen *st)
-{
-	st->rooms = st->rc;
-	while (st->rooms->next)
-	{
-		if (st->rooms->end)
-			return (0);
-		st->rooms = st->rooms->next;
-	}
-	if (st->rooms->end)
-		return (0);
-	return (1);
-}
-
-char	*get_room_data(char *line, t_gen *st)
-{
-	char **array;
-
-	if (st->rooms->name != NULL)
-	{
-		st->rooms->next = new_room();
-		st->rooms->next->index = st->rooms->index + 1;
-		st->rooms = st->rooms->next;
-	}
->>>>>>> 8cbf696e2de841a73e528ad44f160f80bc153ba9
 	if (ft_strcmp(line, "##start") == 0)
 	{
 		if (!check_start(st))
@@ -127,7 +88,7 @@ char	*get_room_data(char *line, t_gen *st)
 		st->rooms->next->index = st->rooms->index + 1;
 		st->rooms = st->rooms->next;
 	}
-	get_room_data_add(line, st);
+	line = get_room_data_add(line, st);
 	if (check_room(line) == 0)
 		ft_error();
 	array = ft_strsplit(line, ' ');

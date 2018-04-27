@@ -39,11 +39,11 @@ void	create_matrix(t_gen *st)
 	while (st->rooms->next)
 		st->rooms = st->rooms->next;
 	st->size = st->rooms->index + 1;
-	if (!(st->matrix = (double**)malloc(sizeof(double*) * st->size)))
+	if (!(st->matrix = (int**)malloc(sizeof(int*) * st->size)))
 		ft_error();
 	while (i < st->size)
 	{
-		if (!(st->matrix[i] = (double*)malloc(sizeof(double) * st->size)))
+		if (!(st->matrix[i] = (int*)malloc(sizeof(int) * st->size)))
 			ft_error();
 		i++;
 	}

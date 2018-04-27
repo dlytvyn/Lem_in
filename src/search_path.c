@@ -12,6 +12,24 @@
 
 #include "lem_in.h"
 
+void    pr_map(t_gen *st)
+{
+	int i = 0;
+	int j;
+
+	while (i < st->size)
+	{
+		j = 0;
+		while (j < st->size)
+		{
+			ft_printf("%d ", st->matrix[i][j]);
+			j++;
+		}
+		i++;
+		ft_printf("\n");
+	}
+}
+
 int		get_coor(t_gen *st, int i)
 {
 	int		j;
@@ -21,8 +39,15 @@ int		get_coor(t_gen *st, int i)
 	j = 0;
 	temp = get_greatest(st, i);
 	res = -1;
+	//pr_map(st);
+	ft_printf("iiii: %d\n", i);
+	ft_printf("temp: %d\n", temp);
 	while (j < st->size)
 	{
+		if (j == 57)
+			ft_printf("Coef: %d\n", st->matrix[i][j]);
+		if (j == 170)
+			ft_printf("Coef 2: %d\n", st->matrix[i][j]);
 		if (st->matrix[i][j] != 0 && st->matrix[i][j]
 			<= temp && is_room_empty(st, j))
 		{
@@ -49,7 +74,7 @@ void	ways_len(t_gen *st)
 	}
 }
 
-void	search_ways_add(t_gen *st, t_path *pr, t_ways *cp, int i)
+void    search_ways_add(t_gen *st, t_path *pr, t_ways *cp, int i)
 {
 	set_room_busy(st, st->first, 1);
 	while (i != st->last)
@@ -67,7 +92,7 @@ void	search_ways_add(t_gen *st, t_path *pr, t_ways *cp, int i)
 			st->ways->path = st->ways->path->next;
 			st->ways->path->prev = pr;
 			st->ways->path->in = st->temp;
-			st->ways->path->name = get_name(st, st->temp);
+			st->ways->path->name = ft_strdup(get_name(st, st->temp));
 		}
 		else
 		{
@@ -115,6 +140,10 @@ void	search_ways(t_gen *st)
 		st->num--;
 	}
 	check_empty_path(st);
+	st->ways = st->ways_copy;
+	st->ways->path = st->ways->path_copy;
+	if (st->ways->path == NULL)
+		ft_error();
 	last_way(st);
 	last_path(st);
 	ways_len(st);

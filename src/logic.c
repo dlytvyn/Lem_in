@@ -91,6 +91,7 @@ void	order(t_gen *st)
 	st->ways = new_ways();
 	st->ways_copy = st->ways;
 	stack_creator(st);
+	pr_map(st);
 	empty_rooms(st);
 	search_ways(st);
 	define_ways(st);

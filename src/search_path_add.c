@@ -14,11 +14,16 @@
 
 char	*get_name(t_gen *st, int room)
 {
+	char *res;
+
 	st->rooms = st->rc;
 	while (st->rooms)
 	{
 		if (st->rooms->index == room)
-			return (st->rooms->name);
+		{
+			res = ft_strdup(st->rooms->name);
+			return (res);
+		}
 		st->rooms = st->rooms->next;
 	}
 	return (NULL);

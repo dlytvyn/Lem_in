@@ -21,7 +21,10 @@ void	clear_this_path(t_gen *st, t_ways *cp)
 	while (st->ways->path)
 	{
 		tmp = st->ways->path->next;
-		free(st->ways->path->name);
+		if (st->ways->path)
+			set_room_busy(st,st->ways->path->in, 0);
+		if (st->ways->path->name)
+			free(st->ways->path->name);
 		free(st->ways->path);
 		st->ways->path = tmp;
 	}
