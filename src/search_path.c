@@ -30,6 +30,21 @@ void    pr_map(t_gen *st)
 	}
 }
 
+void    pr_map_part(t_gen *st, int i)
+{
+	int j;
+
+		j = 0;
+		while (j < st->size)
+		{
+			ft_printf("%d ", st->matrix[i][j]);
+			j++;
+		}
+		i++;
+		ft_printf("\n");
+
+}
+
 int		get_coor(t_gen *st, int i)
 {
 	int		j;
@@ -39,23 +54,22 @@ int		get_coor(t_gen *st, int i)
 	j = 0;
 	temp = get_greatest(st, i);
 	res = -1;
-	//pr_map(st);
-	ft_printf("iiii: %d\n", i);
-	ft_printf("temp: %d\n", temp);
+	pr_map_part(st, i);                  // delete me
 	while (j < st->size)
 	{
-		if (j == 57)
-			ft_printf("Coef: %d\n", st->matrix[i][j]);
-		if (j == 170)
-			ft_printf("Coef 2: %d\n", st->matrix[i][j]);
 		if (st->matrix[i][j] != 0 && st->matrix[i][j]
-			<= temp && is_room_empty(st, j))
+			<= temp)
 		{
-			temp = st->matrix[i][j];
-			res = j;
+			if (is_room_empty(st, j))
+			{
+				temp = st->matrix[i][j];
+				res = j;
+			}
 		}
 		j++;
 	}
+//	st->matrix[i][res] = 0;
+//	st->matrix[res][i] = 0;
 	return (res);
 }
 
@@ -143,7 +157,10 @@ void	search_ways(t_gen *st)
 	st->ways = st->ways_copy;
 	st->ways->path = st->ways->path_copy;
 	if (st->ways->path == NULL)
+	{
+		ft_printf("Path == NULL\n");
 		ft_error();
+	}
 	last_way(st);
 	last_path(st);
 	ways_len(st);

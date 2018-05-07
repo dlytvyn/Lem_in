@@ -26,7 +26,11 @@ void	reader(t_gen *st)
 	while (line[i])
 	{
 		if (ft_isdigit(line[i]) == 0)
+		{
+			ft_printf("Something wrong with number of ants\n");
 			ft_error();
+
+		}
 		i++;
 	}
 	st->ants = ft_atoi(line);

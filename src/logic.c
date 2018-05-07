@@ -79,9 +79,10 @@ void	stack_creator(t_gen *st)
 			break ;
 		stack = search_elem(st, stack, stack[k]);
 		set_room_busy(st, stack[k], 1);
-		st->weight = get_greatest(st, k) + 1;
+		st->weight += 1;
 		k++;
 	}
+	free(stack);
 }
 
 void	order(t_gen *st)
@@ -91,7 +92,7 @@ void	order(t_gen *st)
 	st->ways = new_ways();
 	st->ways_copy = st->ways;
 	stack_creator(st);
-	pr_map(st);
+	//pr_map(st);
 	empty_rooms(st);
 	search_ways(st);
 	define_ways(st);

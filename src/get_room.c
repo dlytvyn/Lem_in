@@ -22,7 +22,11 @@ int		check_room(char *line)
 	if (line[i] == '\0')
 		return (0);
 	if (line[i] != ' ')
+	{
+		ft_printf("Check room 1\n");
 		ft_error();
+
+	}
 	else
 		i++;
 	while (line[i] && ft_isdigit(line[i]))
@@ -30,7 +34,11 @@ int		check_room(char *line)
 	if (line[i] == '\0')
 		return (0);
 	if (line[i] != ' ')
+	{
+		ft_printf("Check room 2\n");
 		ft_error();
+
+	}
 	else
 		i++;
 	while (line[i] && ft_isdigit(line[i]))
@@ -60,7 +68,11 @@ char	*get_room_data_add(char *line, t_gen *st)
 	if (ft_strcmp(line, "##start") == 0)
 	{
 		if (!check_start(st))
+		{
+			ft_printf("one more start\n");
 			ft_error();
+
+		}
 		add_str(st, line);
 		ft_strdel(&line);
 		get_next_line(st->fd, &line);
@@ -69,7 +81,11 @@ char	*get_room_data_add(char *line, t_gen *st)
 	else if (ft_strcmp(line, "##end") == 0)
 	{
 		if (!check_end(st))
+		{
+			ft_printf("one more end\n");
 			ft_error();
+
+		}
 		add_str(st, line);
 		ft_strdel(&line);
 		get_next_line(st->fd, &line);
@@ -90,12 +106,21 @@ char	*get_room_data(char *line, t_gen *st)
 	}
 	line = get_room_data_add(line, st);
 	if (check_room(line) == 0)
+	{
+		ft_printf("checking room\n");
 		ft_error();
+	}
 	array = ft_strsplit(line, ' ');
 	if (array_len(array) != 3)
+	{
+		ft_printf("array len is not 3\n");
 		ft_error();
+	}
 	if (!check_same_coor(st, ft_atoi(array[1]), ft_atoi(array[2])))
+	{
+		ft_printf("same coordinates\n");
 		ft_error();
+	}
 	st->rooms->name = ft_strdup(array[0]);
 	st->rooms->x = ft_atoi(array[1]);
 	st->rooms->y = ft_atoi(array[2]);
