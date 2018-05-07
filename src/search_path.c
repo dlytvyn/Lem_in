@@ -130,19 +130,6 @@ void	search_ways_add2(t_gen *st)
 	}
 }
 
-int     path_len(t_ways *way)
-{
-	int count;
-
-	count = 0;
-	while (way->path)
-	{
-		count++;
-		way->path = way->path->next;
-	}
-	return (count);
-}
-
 void	search_ways(t_gen *st)
 {
 	int		i;
@@ -162,8 +149,6 @@ void	search_ways(t_gen *st)
 		cp = st->ways;
 		i = st->first;
 		search_ways_add(st, pr, cp, i);
-		if (path_len(cp) == 1)
-			break;
 		set_room_busy(st, st->first, 0);
 		set_room_busy(st, st->last, 0);
 		st->num--;

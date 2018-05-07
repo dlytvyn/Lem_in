@@ -91,6 +91,8 @@ char	*get_room_data_add(char *line, t_gen *st)
 		get_next_line(st->fd, &line);
 		st->rooms->end = 1;
 	}
+	else if (line[0] == 'L')
+		ft_error();
 	return (line);
 }
 
