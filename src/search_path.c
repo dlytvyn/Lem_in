@@ -54,7 +54,6 @@ int		get_coor(t_gen *st, int i)
 	j = 0;
 	temp = get_greatest(st, i);
 	res = -1;
-//	pr_map_part(st, i);                  // delete me
 	while (j < st->size)
 	{
 		if (st->matrix[i][j] != 0 && st->matrix[i][j]
@@ -68,8 +67,11 @@ int		get_coor(t_gen *st, int i)
 		}
 		j++;
 	}
-//	st->matrix[i][res] = 0;
-//	st->matrix[res][i] = 0;
+	if (res > 0)
+	{
+		st->matrix[i][res] = 0;
+		st->matrix[res][i] = 0;
+	}
 	return (res);
 }
 

@@ -17,13 +17,19 @@ int		move_path(t_gen *st, int finish)
 	st->ways->path = st->ways->last_path;
 	if (!st->ways->path->prev)
 	{
-		if (st->ways->path == st->ways->last_path && st->ways->path->ant)
+		if (st->ways->path->in == st->last && st->ways->path->ant)
+		{
+			st->ways->path->ant = 0;
 			finish++;
+		}
 	}
 	while (st->ways->path->prev)
 	{
 		if (st->ways->path == st->ways->last_path && st->ways->path->ant)
+		//{
+		//	st->ways->path->ant = 0;
 			finish++;
+		//}
 		st->ways->path->ant = st->ways->path->prev->ant;
 		st->ways->path->prev->ant = 0;
 		st->ways->path = st->ways->path->prev;
