@@ -93,6 +93,13 @@ char	*get_room_data_add(char *line, t_gen *st)
 	}
 	else if (line[0] == 'L')
 		ft_error();
+	if (line[0] == '#' && ft_strcmp(line, "##start") != 0
+	    && ft_strcmp(line, "##end") != 0)
+	{
+		add_str(st, line);
+		ft_strdel(&line);
+		get_next_line(st->fd, &line);
+	}
 	return (line);
 }
 

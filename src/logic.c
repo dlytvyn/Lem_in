@@ -85,6 +85,26 @@ void	stack_creator(t_gen *st)
 	free(stack);
 }
 
+void    show_ways(t_gen *st)
+{
+	st->ways = st->ways_copy;
+	while (st->ways)
+	{
+		st->ways->path = st->ways->path_copy;
+		ft_printf("{green}%s{reset} -> ", get_name(st, st->first));
+		while (st->ways->path)
+		{
+			ft_printf("%s", st->ways->path->name);
+			if (st->ways->path->next)
+				ft_printf(" -> ");
+			else
+				ft_printf("{red}%s{reset} -> ", st->ways->path->name);
+			st->ways->path = st->ways->path->next;
+		}
+		st->ways = st->ways->next;
+	}
+}
+
 void	order(t_gen *st)
 {
 	st->first = search_first(st);
@@ -97,5 +117,7 @@ void	order(t_gen *st)
 	search_ways(st);
 	define_ways(st);
 	ft_printf("%s\n\n", st->map);
+	if (st->w == 1)
+		show_ways(st);
 	motion(st);
 }

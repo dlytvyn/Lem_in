@@ -44,31 +44,69 @@ void	reader(t_gen *st)
 	}
 }
 
+void    flags_manager(t_gen *st, char **argv, int argc)
+{
+	int i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (ft_strcmp(argv[i], "-f") == 0)
+			st->file = 1;
+		if (ft_strcmp(argv[i], "-w") == 0)
+			st->w = 1;
+		i++;
+	}
+}
+
+void    initialization(t_gen *st)
+{
+	st->ants = 0;
+	st->map = NULL;
+	st->rooms = new_room();
+	st->rc = st->rooms;
+	st->matrix = NULL;
+	st->size = 0;
+	st->ways = NULL;
+	st->first = 0;
+	st->num = 0;
+	st->last = 0;
+	st->temp = 0;
+	st->file = 0;
+	st->w = 0;
+	st->last_way = NULL;
+	st->weight = 1;
+}
+
+int     find_file(char **argv, int argc)
+{
+	int i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (ft_strcmp(argv[i], "-f") == 0)
+			return (i + 1);
+		i++;
+	}
+	return (0);
+}
+
 int		main(int argc, char **argv)
 {
 	t_gen	st;
 
-	if (argc != 2)
-		return (1);
-	st.fd = open(argv[1], O_RDONLY);
+	initialization(&st);
+	flags_manager(&st, argv, argc);
+	if (st.file == 1)
+		st.fd = open(argv[find_file(argv, argc)], O_RDONLY);
+	else
+		st.fd = 0;
 	if (st.fd < 0)
 	{
 		ft_printf("Usage: ./lem-in <target file>\n");
 		exit(0);
 	}
-	st.ants = 0;
-	st.map = NULL;
-	st.rooms = new_room();
-	st.rc = st.rooms;
-	st.matrix = NULL;
-	st.size = 0;
-	st.ways = NULL;
-	st.first = 0;
-	st.num = 0;
-	st.last = 0;
-	st.temp = 0;
-	st.last_way = NULL;
-	st.weight = 1;
 	reader(&st);
 	order(&st);
 }

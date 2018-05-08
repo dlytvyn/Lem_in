@@ -67,6 +67,8 @@ typedef struct		s_gen
 	int				weight;
 	int				num;
 	int				temp;
+	int             file;
+	int             w;
 	struct s_ways	*last_way;
 }					t_gen;
 
