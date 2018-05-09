@@ -12,8 +12,6 @@
 
 #include "lem_in.h"
 
-#include "stdio.h"
-
 void	check_basic(t_gen *st)
 {
 	int start;

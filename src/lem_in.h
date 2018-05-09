@@ -69,6 +69,7 @@ typedef struct		s_gen
 	int				temp;
 	int             file;
 	int             w;
+	int				c;
 	struct s_ways	*last_way;
 }					t_gen;
 

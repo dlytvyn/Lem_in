@@ -55,6 +55,8 @@ void    flags_manager(t_gen *st, char **argv, int argc)
 			st->file = 1;
 		if (ft_strcmp(argv[i], "-w") == 0)
 			st->w = 1;
+		if (ft_strcmp(argv[i], "-c") == 0)
+			st->c = 1;
 		i++;
 	}
 }
@@ -74,6 +76,7 @@ void    initialization(t_gen *st)
 	st->temp = 0;
 	st->file = 0;
 	st->w = 0;
+	st->c = 0;
 	st->last_way = NULL;
 	st->weight = 1;
 }

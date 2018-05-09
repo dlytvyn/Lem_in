@@ -26,15 +26,26 @@ int		move_path(t_gen *st, int finish)
 	while (st->ways->path->prev)
 	{
 		if (st->ways->path == st->ways->last_path && st->ways->path->ant)
-		//{
-		//	st->ways->path->ant = 0;
 			finish++;
-		//}
 		st->ways->path->ant = st->ways->path->prev->ant;
 		st->ways->path->prev->ant = 0;
 		st->ways->path = st->ways->path->prev;
 	}
 	return (finish);
+}
+
+void	print_add(t_gen *st)
+{
+	if (st->ways->path->in == st->last)
+	{
+		ft_printf("{red}%s", "L");
+		ft_printf("{red}%d-%s{reset}", st->ways->path->ant, st->ways->path->name);
+	}
+	else
+	{
+		ft_printf("{yellow}%s", "L");
+		ft_printf("{yellow}%d-%s{reset}", st->ways->path->ant, st->ways->path->name);
+	}
 }
 
 void	print(t_gen *st)
@@ -50,7 +61,10 @@ void	print(t_gen *st)
 		{
 			if (st->ways->path->ant)
 			{
-				ft_printf("L%d-%s", st->ways->path->ant, st->ways->path->name);
+				if (st->c == 1)
+					print_add(st);
+				else
+					ft_printf("L%d-%s", st->ways->path->ant, st->ways->path->name);
 				i++;
 			}
 			if (st->ways->path->prev && st->ways->path->prev->ant

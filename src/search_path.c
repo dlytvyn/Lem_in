@@ -56,8 +56,7 @@ int		get_coor(t_gen *st, int i)
 	res = -1;
 	while (j < st->size)
 	{
-		if (st->matrix[i][j] != 0 && st->matrix[i][j]
-			<= temp)
+		if (st->matrix[i][j] != 0 && st->matrix[i][j] <= temp)
 		{
 			if (is_room_empty(st, j))
 			{

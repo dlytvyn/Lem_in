@@ -87,6 +87,7 @@ void	stack_creator(t_gen *st)
 
 void    show_ways(t_gen *st)
 {
+	ft_printf("{blue}%s\n", "All possible ways:");
 	st->ways = st->ways_copy;
 	while (st->ways)
 	{
@@ -94,15 +95,16 @@ void    show_ways(t_gen *st)
 		ft_printf("{green}%s{reset} -> ", get_name(st, st->first));
 		while (st->ways->path)
 		{
-			ft_printf("%s", st->ways->path->name);
 			if (st->ways->path->next)
-				ft_printf(" -> ");
+				ft_printf("{yellow}%s{reset} -> ", st->ways->path->name);
 			else
-				ft_printf("{red}%s{reset} -> ", st->ways->path->name);
+				ft_printf("{red}%s{reset}", st->ways->path->name);
 			st->ways->path = st->ways->path->next;
 		}
+		ft_printf("\n");
 		st->ways = st->ways->next;
 	}
+	ft_printf("\n");
 }
 
 void	order(t_gen *st)
@@ -112,7 +114,6 @@ void	order(t_gen *st)
 	st->ways = new_ways();
 	st->ways_copy = st->ways;
 	stack_creator(st);
-	//pr_map(st);
 	empty_rooms(st);
 	search_ways(st);
 	define_ways(st);
