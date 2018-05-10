@@ -34,6 +34,9 @@ void	clear_this_path(t_gen *st, t_ways *cp)
 
 void	check_empty_path(t_gen *st)
 {
+	t_ways *tmp;
+
+	tmp = NULL;
 	st->ways = st->ways_copy;
 	while (st->ways)
 	{
@@ -45,10 +48,10 @@ void	check_empty_path(t_gen *st)
 			st->ways->path_copy = NULL;
 			free(st->ways);
 			st->ways = NULL;
-			st->ways = st->ways_copy;
-			st->ways->next = NULL;
+			tmp->next = NULL;
 			return ;
 		}
+		tmp = st->ways;
 		st->ways = st->ways->next;
 	}
 }
