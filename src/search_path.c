@@ -69,7 +69,7 @@ void	search_ways_add(t_gen *st, t_path *pr, t_ways *cp, int i)
 		set_room_busy(st, st->temp, 1);
 		if (st->ways->path->name)
 		{
-			st->ways->path->next = new_path();
+			st->ways->path->next = new_path();                                    // leaks here
 			pr = st->ways->path;
 			st->ways->path = st->ways->path->next;
 			st->ways->path->prev = pr;
@@ -91,7 +91,7 @@ void	search_ways_add2(t_gen *st)
 
 	if (st->ways->path->name)
 	{
-		st->ways->next = new_ways();
+		st->ways->next = new_ways();                                    // leaks here
 		prev = st->ways;
 		st->ways = st->ways->next;
 		st->ways->prev = prev;

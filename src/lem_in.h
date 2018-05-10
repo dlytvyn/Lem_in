@@ -71,6 +71,7 @@ typedef struct		s_gen
 	int				w;
 	int				c;
 	int				i;
+	int             l;
 	int				count_i;
 	struct s_ways	*last_way;
 }					t_gen;

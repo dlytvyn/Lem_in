@@ -37,6 +37,20 @@ int		*search_elem(t_gen *st, int *stack, int row)
 	return (stack);
 }
 
+void    show_length(t_gen *st)
+{
+	int i;
+
+	i = 0;
+	st->ways->path = st->ways->path_copy;
+	while (st->ways->path)
+	{
+		i++;
+		st->ways->path = st->ways->path->next;
+	}
+	ft_printf("{magenta}   %s %d", "|  Way's length:", i + 1);
+}
+
 void	show_ways(t_gen *st)
 {
 	ft_printf("{blue}%s\n", "All possible ways:");
@@ -53,6 +67,8 @@ void	show_ways(t_gen *st)
 				ft_printf("{red}%s{reset}", st->ways->path->name);
 			st->ways->path = st->ways->path->next;
 		}
+		if (st->l == 1)
+			show_length(st);
 		ft_printf("\n");
 		st->ways = st->ways->next;
 	}

@@ -55,6 +55,8 @@ void	flags_manager(t_gen *st, char **argv, int argc)
 			st->c = 1;
 		if (ft_strcmp(argv[i], "-i") == 0)
 			st->i = 1;
+		if (ft_strcmp(argv[i], "-l") == 0)
+			st->l = 1;
 		i++;
 	}
 }
@@ -78,6 +80,7 @@ void	initialization(t_gen *st)
 	st->last_way = NULL;
 	st->weight = 1;
 	st->i = 0;
+	st->l = 1;
 	st->count_i = 0;
 }
 
@@ -107,7 +110,7 @@ int		main(int argc, char **argv)
 		st.fd = 0;
 	if (st.fd < 0)
 	{
-		ft_printf("Usage: ./lem-in <target file>\n");
+		ft_printf("Usage: ./lem-in [-w -c -i -f] <target file>\n");
 		exit(0);
 	}
 	reader(&st);
