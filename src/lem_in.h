@@ -58,7 +58,7 @@ typedef struct		s_gen
 	char			*map;
 	struct s_rooms	*rooms;
 	struct s_rooms	*rc;
-	int			    **matrix;
+	int				**matrix;
 	int				size;
 	struct s_ways	*ways;
 	struct s_ways	*ways_copy;
@@ -67,11 +67,11 @@ typedef struct		s_gen
 	int				weight;
 	int				num;
 	int				temp;
-	int             file;
-	int             w;
+	int				file;
+	int				w;
 	int				c;
-	int             i;
-	int             count_i;
+	int				i;
+	int				count_i;
 	struct s_ways	*last_way;
 }					t_gen;
 
@@ -107,8 +107,14 @@ int					check_end(t_gen *st);
 int					check_start(t_gen *st);
 void				clear_this_path(t_gen *st, t_ways *cp);
 void				check_empty_path(t_gen *st);
-
-
-void    pr_map(t_gen *st);
+void				pr_map(t_gen *st);
+void				clear_all(t_gen *st);
+void				clear_rooms(t_gen *st);
+void				clear_ways(t_gen *st);
+void				stack_creator(t_gen *st);
+int					room_in_stack(int *stack, int j);
+int					*set_stack(t_gen *st, int *stack);
+int					*search_elem(t_gen *st, int *stack, int row);
+void				print(t_gen *st);
 
 #endif

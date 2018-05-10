@@ -40,7 +40,7 @@ void	reader(t_gen *st)
 	}
 }
 
-void    flags_manager(t_gen *st, char **argv, int argc)
+void	flags_manager(t_gen *st, char **argv, int argc)
 {
 	int i;
 
@@ -59,7 +59,7 @@ void    flags_manager(t_gen *st, char **argv, int argc)
 	}
 }
 
-void    initialization(t_gen *st)
+void	initialization(t_gen *st)
 {
 	st->ants = 0;
 	st->map = NULL;
@@ -81,7 +81,7 @@ void    initialization(t_gen *st)
 	st->count_i = 0;
 }
 
-int     find_file(char **argv, int argc)
+int		find_file(char **argv, int argc)
 {
 	int i;
 

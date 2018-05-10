@@ -55,35 +55,35 @@ int		check_same_coor(t_gen *st, int x, int y)
 	return (1);
 }
 
+char	*routine(t_gen *st, char *line)
+{
+	add_str(st, line);
+	ft_strdel(&line);
+	get_next_line(st->fd, &line);
+	return (line);
+}
+
 char	*get_room_data_add(char *line, t_gen *st)
 {
 	if (ft_strcmp(line, "##start") == 0)
 	{
 		if (!check_start(st))
 			ft_error();
-		add_str(st, line);
-		ft_strdel(&line);
-		get_next_line(st->fd, &line);
+		line = routine(st, line);
 		st->rooms->start = 1;
 	}
 	else if (ft_strcmp(line, "##end") == 0)
 	{
 		if (!check_end(st))
 			ft_error();
-		add_str(st, line);
-		ft_strdel(&line);
-		get_next_line(st->fd, &line);
+		line = routine(st, line);
 		st->rooms->end = 1;
 	}
 	else if (line[0] == 'L')
 		ft_error();
 	if (line[0] == '#' && ft_strcmp(line, "##start") != 0
 		&& ft_strcmp(line, "##end") != 0)
-	{
-		add_str(st, line);
-		ft_strdel(&line);
-		get_next_line(st->fd, &line);
-	}
+		line = routine(st, line);
 	return (line);
 }
 

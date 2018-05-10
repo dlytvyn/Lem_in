@@ -22,7 +22,7 @@ void	clear_this_path(t_gen *st, t_ways *cp)
 	{
 		tmp = st->ways->path->next;
 		if (st->ways->path)
-			set_room_busy(st,st->ways->path->in, 0);
+			set_room_busy(st, st->ways->path->in, 0);
 		if (st->ways->path->name)
 			free(st->ways->path->name);
 		free(st->ways->path);

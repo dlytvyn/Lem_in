@@ -56,7 +56,7 @@ void	ways_len(t_gen *st)
 	}
 }
 
-void    search_ways_add(t_gen *st, t_path *pr, t_ways *cp, int i)
+void	search_ways_add(t_gen *st, t_path *pr, t_ways *cp, int i)
 {
 	set_room_busy(st, st->first, 1);
 	while (i != st->last)
@@ -108,7 +108,7 @@ void	search_ways(t_gen *st)
 	st->num = path_num(st);
 	if (st->num == 0)
 		exit(0);
-	while (st->num > 0)
+	while (st->num-- > 0)
 	{
 		search_ways_add2(st);
 		cp = st->ways;
@@ -116,7 +116,6 @@ void	search_ways(t_gen *st)
 		search_ways_add(st, pr, cp, i);
 		set_room_busy(st, st->first, 0);
 		set_room_busy(st, st->last, 0);
-		st->num--;
 	}
 	check_empty_path(st);
 	st->ways = st->ways_copy;
