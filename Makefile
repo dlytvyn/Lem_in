@@ -9,12 +9,16 @@ CODE =		./src/main.c\
 			./src/additional.c\
 			./src/get_link.c\
 			./src/get_room.c\
+			./src/get_room_add.c\
 			./src/logic.c\
 			./src/logic_add.c\
 			./src/matrix.c\
 			./src/movement.c\
+			./src/movement_add.c\
 			./src/parse_data.c\
 			./src/search_path.c\
+			./src/search_path_add.c\
+			./src/search_path_add2.c\
 
 OBJ = $(CODE:.c=.o)
 

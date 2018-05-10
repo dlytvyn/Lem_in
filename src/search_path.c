@@ -12,39 +12,6 @@
 
 #include "lem_in.h"
 
-void    pr_map(t_gen *st)
-{
-	int i = 0;
-	int j;
-
-	while (i < st->size)
-	{
-		j = 0;
-		while (j < st->size)
-		{
-			ft_printf("%d ", st->matrix[i][j]);
-			j++;
-		}
-		i++;
-		ft_printf("\n");
-	}
-}
-
-void    pr_map_part(t_gen *st, int i)
-{
-	int j;
-
-		j = 0;
-		while (j < st->size)
-		{
-			ft_printf("%d ", st->matrix[i][j]);
-			j++;
-		}
-		i++;
-		ft_printf("\n");
-
-}
-
 int		get_coor(t_gen *st, int i)
 {
 	int		j;
@@ -107,7 +74,7 @@ void    search_ways_add(t_gen *st, t_path *pr, t_ways *cp, int i)
 			st->ways->path = st->ways->path->next;
 			st->ways->path->prev = pr;
 			st->ways->path->in = st->temp;
-			st->ways->path->name = ft_strdup(get_name(st, st->temp));
+			st->ways->path->name = get_name(st, st->temp);
 		}
 		else
 		{
@@ -140,10 +107,7 @@ void	search_ways(t_gen *st)
 	pr = NULL;
 	st->num = path_num(st);
 	if (st->num == 0)
-	{
-		ft_printf("There is no solution\n");
 		exit(0);
-	}
 	while (st->num > 0)
 	{
 		search_ways_add2(st);
@@ -158,10 +122,7 @@ void	search_ways(t_gen *st)
 	st->ways = st->ways_copy;
 	st->ways->path = st->ways->path_copy;
 	if (st->ways->path == NULL)
-	{
-		ft_printf("Path == NULL\n");
 		ft_error();
-	}
 	last_way(st);
 	last_path(st);
 	ways_len(st);

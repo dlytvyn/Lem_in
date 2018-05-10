@@ -107,6 +107,56 @@ void    show_ways(t_gen *st)
 	ft_printf("\n");
 }
 
+void	clear_ways(t_gen *st)
+{
+	t_path *tmp_p;
+	t_ways *tmp_w;
+
+	st->ways = st->ways_copy;
+	while (st->ways)
+	{
+		st->ways->path = st->ways->path_copy;
+		while (st->ways->path)
+		{
+			tmp_p = st->ways->path->next;
+			ft_strdel(&st->ways->path->name);
+			free(st->ways->path);
+			st->ways->path = tmp_p;
+		}
+		tmp_w = st->ways->next;
+		free(st->ways);
+		st->ways = tmp_w;
+	}
+}
+
+void    clear_rooms(t_gen *st)
+{
+	t_rooms *tmp;
+
+	st->rooms = st->rc;
+	while (st->rooms)
+	{
+		tmp = st->rooms->next;
+		ft_strdel(&st->rooms->name);
+		free(st->rooms);
+		st->rooms = tmp;
+	}
+}
+
+void    clear_all(t_gen *st)
+{
+	int i;
+
+	i = 0;
+	ft_strdel(&st->map);
+	while (i < st->size)
+		free(st->matrix[i++]);
+    free(st->matrix);
+	st->matrix = NULL;
+	clear_ways(st);
+	clear_rooms(st);
+}
+
 void	order(t_gen *st)
 {
 	st->first = search_first(st);
@@ -121,4 +171,8 @@ void	order(t_gen *st)
 	if (st->w == 1)
 		show_ways(st);
 	motion(st);
+	if (st->i == 1)
+		ft_printf("\n{blue}%s: %d{reset}\n", "Number of steps", st->count_i);
+	clear_all(st);
+	system("leaks lem-in");
 }

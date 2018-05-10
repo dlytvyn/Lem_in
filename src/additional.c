@@ -69,7 +69,8 @@ void	free_array(char **array)
 	i = 0;
 	while (array[i])
 	{
-		free(array[i]);
+		ft_strdel(&array[i]);
 		i++;
 	}
+	free(array);
 }

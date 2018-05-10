@@ -26,11 +26,7 @@ void	reader(t_gen *st)
 	while (line[i])
 	{
 		if (ft_isdigit(line[i]) == 0)
-		{
-			ft_printf("Something wrong with number of ants\n");
 			ft_error();
-
-		}
 		i++;
 	}
 	st->ants = ft_atoi(line);
@@ -57,6 +53,8 @@ void    flags_manager(t_gen *st, char **argv, int argc)
 			st->w = 1;
 		if (ft_strcmp(argv[i], "-c") == 0)
 			st->c = 1;
+		if (ft_strcmp(argv[i], "-i") == 0)
+			st->i = 1;
 		i++;
 	}
 }
@@ -79,6 +77,8 @@ void    initialization(t_gen *st)
 	st->c = 0;
 	st->last_way = NULL;
 	st->weight = 1;
+	st->i = 0;
+	st->count_i = 0;
 }
 
 int     find_file(char **argv, int argc)

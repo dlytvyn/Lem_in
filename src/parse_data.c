@@ -29,10 +29,7 @@ void	check_basic(t_gen *st)
 		st->rooms = st->rooms->next;
 	}
 	if (start != 1 || end != 1)
-	{
-		ft_printf("No start or no end\n");
 		ft_error();
-	}
 }
 
 char	*get_data(char *line, t_gen *st)

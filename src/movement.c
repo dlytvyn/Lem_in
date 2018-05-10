@@ -76,6 +76,7 @@ void	print(t_gen *st)
 			ft_printf(" ");
 		st->ways = st->ways->next;
 	}
+	st->count_i++;
 	ft_printf("\n");
 }
 

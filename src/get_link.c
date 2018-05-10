@@ -25,10 +25,7 @@ void	check_name(char *name, t_gen *st)
 		st->rooms = st->rooms->next;
 	}
 	if (i != 1)
-	{
-		ft_printf("wrong room name in link\n");
 		ft_error();
-	}
 }
 
 int		search_in(char *name, t_gen *st)
@@ -52,8 +49,6 @@ void	set_link(char **array, t_gen *st)
 	l2 = search_in(array[1], st);
 	if (l1 == l2)
 		ft_error();
-//	if (st->matrix[l1][l2] && st->matrix[l2][l1] == 1)
-//		ft_error();
 	st->matrix[l1][l2] = 1;
 	st->matrix[l2][l1] = 1;
 }
@@ -64,12 +59,10 @@ char	*get_link_data(char *line, t_gen *st)
 
 	array = ft_strsplit(line, '-');
 	if (array_len(array) != 2)
-	{
-		ft_printf("link array not equal 2\n");
 		ft_error();
-	}
 	check_name(array[0], st);
 	check_name(array[1], st);
 	set_link(array, st);
+	free_array(array);
 	return (line);
 }

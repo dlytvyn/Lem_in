@@ -70,6 +70,8 @@ typedef struct		s_gen
 	int             file;
 	int             w;
 	int				c;
+	int             i;
+	int             count_i;
 	struct s_ways	*last_way;
 }					t_gen;
 
