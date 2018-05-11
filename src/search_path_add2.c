@@ -48,7 +48,8 @@ void	check_empty_path(t_gen *st)
 			st->ways->path_copy = NULL;
 			free(st->ways);
 			st->ways = NULL;
-			tmp->next = NULL;
+			if (tmp)
+				tmp->next = NULL;
 			return ;
 		}
 		tmp = st->ways;

@@ -18,18 +18,19 @@ void	reader(t_gen *st)
 	int		i;
 
 	i = 0;
-	if (get_next_line(st->fd, &line) < 0)
+	if (get_next_line(st->fd, &line) <= 0)
 	{
 		ft_printf("Usage: ./lem-in <target file>\n");
 		exit(0);
 	}
 	while (line[i])
 	{
-		if (ft_isdigit(line[i]) == 0)
+		if (ft_isdigit(line[i++]) == 0)
 			ft_error();
-		i++;
 	}
 	st->ants = ft_atoi(line);
+	if (st->ants <= 0)
+		ft_error();
 	st->map = ft_strdup(line);
 	ft_strdel(&line);
 	while (get_next_line(st->fd, &line))
@@ -80,7 +81,7 @@ void	initialization(t_gen *st)
 	st->last_way = NULL;
 	st->weight = 1;
 	st->i = 0;
-	st->l = 1;
+	st->l = 0;
 	st->count_i = 0;
 }
 
@@ -110,7 +111,7 @@ int		main(int argc, char **argv)
 		st.fd = 0;
 	if (st.fd < 0)
 	{
-		ft_printf("Usage: ./lem-in [-w -c -i -f] <target file>\n");
+		ft_printf("Usage: ./lem-in [-w -c -i -l -f] <target file>\n");
 		exit(0);
 	}
 	reader(&st);

@@ -48,7 +48,8 @@ void	show_length(t_gen *st)
 		i++;
 		st->ways->path = st->ways->path->next;
 	}
-	ft_printf("{magenta}   %s %d", "|  Way's length:", i + 1);
+	if (st->l)
+		ft_printf("{magenta}   %s %d{reset}", "|  Way's length:", i + 1);
 }
 
 void	show_ways(t_gen *st)
@@ -96,5 +97,4 @@ void	order(t_gen *st)
 	if (st->i == 1)
 		ft_printf("\n{blue}%s: %d{reset}\n", "Number of steps", st->count_i);
 	clear_all(st);
-	system("leaks lem-in");
 }

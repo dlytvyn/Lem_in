@@ -34,6 +34,8 @@ void	check_basic(t_gen *st)
 
 char	*get_data(char *line, t_gen *st)
 {
+	if (line == NULL)
+		ft_error();
 	if (line[0] == '#' && ft_strcmp(line, "##start") != 0
 		&& ft_strcmp(line, "##end") != 0)
 	{

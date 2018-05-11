@@ -81,7 +81,7 @@ char	*get_room_data_add(char *line, t_gen *st)
 	}
 	else if (line[0] == 'L')
 		ft_error();
-	if (line[0] == '#' && ft_strcmp(line, "##start") != 0
+	while (line[0] == '#' && ft_strcmp(line, "##start") != 0
 		&& ft_strcmp(line, "##end") != 0)
 		line = routine(st, line);
 	return (line);

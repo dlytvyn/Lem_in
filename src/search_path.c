@@ -107,7 +107,7 @@ void	search_ways(t_gen *st)
 	pr = NULL;
 	st->num = path_num(st);
 	if (st->num == 0)
-		exit(0);
+		no_solution();
 	while (st->num-- > 0)
 	{
 		search_ways_add2(st);

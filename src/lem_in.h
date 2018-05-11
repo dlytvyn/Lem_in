@@ -117,5 +117,6 @@ int					room_in_stack(int *stack, int j);
 int					*set_stack(t_gen *st, int *stack);
 int					*search_elem(t_gen *st, int *stack, int row);
 void				print(t_gen *st);
+void				no_solution(void);
 
 #endif

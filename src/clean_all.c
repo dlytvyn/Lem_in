@@ -61,3 +61,9 @@ void	clear_all(t_gen *st)
 	clear_ways(st);
 	clear_rooms(st);
 }
+
+void	no_solution(void)
+{
+	ft_printf("{red}%s\n{reset}", "There is no solution!");
+	exit(0);
+}
